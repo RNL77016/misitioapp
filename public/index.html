@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Ubicaciones con Leaflet</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Mapa de puntos de interes</h1>
+    <div id="map"></div>
+
+    <form id="place-form">
+        <input type="hidden" id="place-id">
+        <input type="text" id="name" placeholder="Nombre del lugar" required>
+        <input type="text" id="description" placeholder="Descripción" required>
+        <input type="hidden" id="lat">
+        <input type="hidden" id="lng">
+        <button type="submit">Guardar el lugar</button>
+        <button type="button" id="cancel-edit" style="display:none;">Cancelar edición</button>
+    </form>
+
+    <section id="lists">
+        <h2>Lista de lugares</h2>
+        <table id="places-table">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Coordenadas</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+        <h2>Registro de cambios</h2>
+        <table id="change-log">
+            <thead>
+                <tr>
+                    <th>Fecha / Hora</th>
+                    <th>Acción</th>
+                    <th>Place ID</th>
+                    <th>Detalles</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </section>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

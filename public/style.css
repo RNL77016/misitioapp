@@ -1,0 +1,67 @@
+body{
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+#map{
+    height: 500px;
+    width: 100%;
+}
+
+form{
+    margin-top: 10px;
+}
+
+input{
+    padding: 5px;
+    margin: 5px;
+}
+
+button{
+    padding: 6px 10px;
+    background-color: #0066cc;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover{
+    background-color: #004d99;
+}
+
+#lists{
+    padding: 10px 20px;
+    text-align: left;
+}
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 16px;
+}
+
+table thead th{
+    background: #f2f2f2;
+    padding: 8px;
+    text-align: left;
+}
+
+table tbody td{
+    padding: 8px;
+    border-top: 1px solid #e6e6e6;
+}
+
+.edit-btn, .delete-btn{
+    margin-right: 6px;
+    padding: 4px 8px;
+}
+
+.delete-btn{
+    background: #cc0000;
+}
+
+.delete-btn:hover{
+    background: #990000;
+}
