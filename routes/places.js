@@ -25,7 +25,6 @@ router.get('/:id', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-    // Accept both 'description' and 'descripcion' from the client
     const { name, descripcion, description, latitude, longitude } = req.body;
     const desc = descripcion || description || '';
     try{

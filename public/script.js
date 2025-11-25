@@ -1,10 +1,9 @@
-const map = L.map('map').setView([10.67, -101.35], 13); //Coordenadas iniciales
+const map = L.map('map').setView([21.1250077, -101.6859605], 13); //Coordenadas iniciales
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: 'Map data OpenStreetMap contributors'
 }).addTo(map);
 
-// marker management
 let selectedMarker = null;
 const markers = new Map();
 
@@ -21,7 +20,6 @@ map.on('click', function(e) {
         .bindPopup('Ubicación seleccionada').openPopup();
 });
 
-// Change log in localStorage
 const CHANGELOG_KEY = 'changeLog';
 
 function loadChangeLog() {
@@ -48,7 +46,6 @@ function appendChangeLog(action, id, details) {
         id,
         details
     });
-    // keep max 100 entries
     if (log.length > 100) log.splice(100);
     saveChangeLog(log);
     renderChangeLog();
@@ -60,7 +57,6 @@ function renderChangeLog() {
     tbody.innerHTML = '';
     const log = loadChangeLog();
     if (!Array.isArray(log) || log.length === 0) {
-        // show a friendly placeholder row when no entries exist
         const tr = document.createElement('tr');
         tr.innerHTML = `<td colspan="4" style="opacity:.7">No hay registros de cambios</td>`;
         tbody.appendChild(tr);
@@ -82,7 +78,6 @@ function renderChangeLog() {
     });
 }
 
-// Form handling: create or update
 const form = document.getElementById('place-form');
 const cancelBtn = document.getElementById('cancel-edit');
 
@@ -99,7 +94,6 @@ form.addEventListener('submit', async function(e) {
 
     try {
         if (placeId) {
-            // update
             const body = { name, description };
             if (latitude !== undefined && longitude !== undefined) {
                 body.latitude = latitude;
@@ -115,7 +109,6 @@ form.addEventListener('submit', async function(e) {
             appendChangeLog('UPDATE', updated._id, `${updated.name} - ${updated.descripcion}`);
             alert('Lugar actualizado');
         } else {
-            // create
             const res = await fetch('/api/places', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -147,16 +140,13 @@ function resetForm() {
     if (selectedMarker) { map.removeLayer(selectedMarker); selectedMarker = null; }
 }
 
-// Load places -> add markers and fill table
 async function loadPlaces() {
     const res = await fetch('/api/places');
     const places = await res.json();
 
-    // clear existing markers
     markers.forEach(m => map.removeLayer(m));
     markers.clear();
 
-    // fill table
     const tbody = document.querySelector('#places-table tbody');
     tbody.innerHTML = '';
 
@@ -180,7 +170,6 @@ async function loadPlaces() {
         tbody.appendChild(tr);
     });
 
-    // attach handlers
     document.querySelectorAll('.edit-btn').forEach(btn => {
         btn.addEventListener('click', async function() {
             const id = this.dataset.id;
@@ -221,6 +210,5 @@ async function loadPlaces() {
     renderChangeLog();
 }
 
-// initial load
 loadPlaces();
 renderChangeLog();
